@@ -29,35 +29,35 @@
     <div class="col-sm">
 
     <form>
-    <div class="form-group row">
+    <div class="form-group row"> <!-- start of product name input -->
         <label for="prod_name" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-10">
         <input type="text" class="form-control" id="prod_name" placeholder="Name">
         </div>
-    </div>
+    </div><!-- end of product name input -->
 
-    <div class="form-group row">
+    <div class="form-group row"><!-- start of product description input -->
         <label for="prod_desc" class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-10">
         <input type="text" class="form-control" id="prod_desc" placeholder="Description">
         </div>
-    </div>
+    </div><!-- end of product description input -->
 
-    <div class="form-group row">
+    <div class="form-group row"><!-- start of product price input -->
         <label for="prod_price" class="col-sm-2 col-form-label">Price</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="prod_price" placeholder="Price">
+        <input type="number" min=0 class="form-control" id="prod_price" placeholder="Price">
         </div>
-    </div>
+    </div><!-- end of product price input -->
 
-    <div class="form-group row">
+    <div class="form-group row"><!-- start of product quantity input -->
         <label for="prod_quantity" class="col-sm-2 col-form-label">Quantity</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="prod_quantity" placeholder="Quantity">
+        <input type="number" min=0 class="form-control" id="prod_quantity" placeholder="Quantity">
         </div>
-    </div>
+    </div><!-- start of product quantity input -->
 
-    <div class="form-group">
+    <div class="form-group"><!-- start of product category select -->
     <div class="form-row">
     <div class="col-md-12">
         <select id="prod_category" name="prod_category" class="custom-select" id="inputGroupSelect04">
@@ -75,7 +75,7 @@
     </select>  
     </div>
     </div>
-    </div>
+    </div><!-- end of product category select -->
 
     <hr>
     <button type="button" class="btn btn-outline-primary" id="save">Save</button>
@@ -89,14 +89,12 @@
         <button class="btn btn-warning" id="edit">Edit</button>
         <button class="btn btn-danger" id="delete">Delete</button>
     </div><br>
-
     <div>
-
 
     <select class="form-select" aria-label="Default select example" id="selectStocks">
     <option selected value="default">All Stocks</option>
     <option value="withStocks">With Stocks</option>
-    <option value="withoutStocks">Without Stocks</option>
+    <option value="withoutStocks">No Stocks</option>
     </select>
     </div><br>
 
@@ -142,35 +140,35 @@
         </button>
       </div>
       <div class="modal-body">
-    <div class="form-group row">
+    <div class="form-group row"><!-- start of new product name input -->
         <label for="new_prod_name" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-10">
         <input type="text" class="form-control" id="new_prod_name" placeholder="Name">
         </div>
-    </div>
+    </div><!-- end of new product name input -->
 
-    <div class="form-group row">
+    <div class="form-group row"><!-- start of  new product description input -->
         <label for="new_prod_desc" class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-10">
         <input type="text" class="form-control" id="new_prod_desc" placeholder="Description">
         </div>
-    </div>
+    </div><!-- end of product description input -->
 
-    <div class="form-group row">
+    <div class="form-group row"><!-- start of new product price input -->
         <label for="new_prod_price" class="col-sm-2 col-form-label">Price</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="new_prod_price" placeholder="Price">
+        <input type="number" min=0  class="form-control" id="new_prod_price" placeholder="Price">
         </div>
-    </div>
+    </div><!-- end of new product price input -->
 
-    <div class="form-group row">
+    <div class="form-group row"><!-- start of new product quantity input -->
         <label for="new_prod_quantity" class="col-sm-2 col-form-label">Quantity</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="new_prod_quantity" placeholder="Quantity">
+        <input type="number" min=0 class="form-control" id="new_prod_quantity" placeholder="Quantity">
         </div>
-    </div>
+    </div><!-- end of new product quantity input -->
 
-    <div class="form-group">
+    <div class="form-group"><!-- start of new product select -->
     <div class="form-row">
     <div class="col-md-12">
         <select id="new_prod_category" name="new_prod_category" class="custom-select" id="inputGroupSelect04">
@@ -188,7 +186,7 @@
     </select>  
     </div>
     </div>
-    </div>    
+    </div><!-- end of new product select -->    
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -219,169 +217,10 @@
   </div>
 </div>
 
-
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"/>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
-
-<script>
-    var counter = 0;
-    $(document).ready(function(){
-
-        $("#save").click(function(){
-            var prod_name = $("#prod_name").val();
-            var prod_desc = $("#prod_desc").val();
-            var prod_price = $("#prod_price").val();
-            var prod_quantity = $("#prod_quantity").val();
-            var prod_category = $("#prod_category").val();
-
-            $.ajax({
-                type:"POST",
-                url: "operations/save_product.php",
-                data: {prod_name:prod_name,prod_desc:prod_desc,prod_price:prod_price,
-                prod_quantity:prod_quantity,prod_category:prod_category},
-                dataType:"text",
-                success:function(data){
-                    alert("Product Saved...")
-                }
-            })
-
-        });
-
-    });
-
-    $(document).ready( function () {
-        $('#productsTable').DataTable();
-    } );
-
-</script>
-
-<script>
-
-    $("#edit").click(function(){
-        if(counter == 0){
-            alert("Please select a product to edit");
-        }else{
-            $("#editModal").modal("show");
-        }
-    });
-    
-    $("#delete").click(function(){
-        if(counter == 0){
-            alert("Please select a product to remove");
-        }else{
-            $("#deleteModal").modal("show");
-        }
-    });
-
-    var table = $('#productsTable').DataTable();   
-    $('#productsTable tbody').on('click', 'tr', function () {
-        var data = table.row( this ).data();
-        $("#productsTable tbody tr").removeClass('row_selected');        
-        $(this).addClass('row_selected');
-        var data = table.row( this ).data();
-        var prod_id = data[0];
-        var prod_name = data[1];
-        var prod_price = data[2];
-        counter++;
-        $("#edit").click(function (){
-            $.ajax({
-                type:"POST",
-                url: "operations/products.php",
-                data:{prod_id:prod_id,prod_name:prod_name},
-                dataType:"json",
-                success:function(response){
-                    var len = response.length;
-                    for(var i=0; i<len; i++){
-                        $("#new_prod_name").val(response[i]['prod_name']);
-                        $("#new_prod_desc").val(response[i]['prod_desc']);
-                        $("#new_prod_price").val(response[i]['prod_price']);
-                        $("#new_prod_quantity").val(response[i]['prod_quantity']);
-                        $('#new_prod_category').append($('<option>', {
-                            value: response[i]['prod_category'],
-                            text: response[i]['prod_category'],
-                            selected: "selected"
-                        }));
-                    }
-                }
-            });
-        
-        });
-
-        $("#save_changes").click(function(){
-            var new_prod_name = $("#new_prod_name").val();
-            var new_prod_desc = $("#new_prod_desc").val();
-            var new_prod_price = $("#new_prod_price").val();
-            var new_prod_quantity = $("#new_prod_quantity").val();
-            var new_prod_category = $("#new_prod_category").val();
-
-            $.ajax({
-                type:"POST",
-                url:"operations/update_product.php",
-                data:{new_prod_name:new_prod_name,new_prod_desc:new_prod_desc,
-                new_prod_price:new_prod_price,new_prod_quantity:new_prod_quantity,
-                new_prod_category:new_prod_category},
-                dataType:"text",
-                success:function(){
-                    alert("Product updated")
-                    window.location.reload();
-                }
-            })
-
-        });
-
-        $("#deleteProduct").click(function(){
-            $.ajax({
-                type:"POST",
-                url:"operations/delete_product.php",
-                data:{prod_id,prod_id},
-                dataType:"text",
-                success:function(){
-                    alert("Product deleted successfully")
-                    window.location.reload();
-                }
-            });
-        });
-
-   
-        
-    });
-
-
-    $("#selectStocks").on('change', function(){
-        var selection = $("#selectStocks").val();
-
-        if(selection == "default"){
-            window.location.reload();
-        }
-
-        $.ajax({
-            type:"POST",
-            url:"operations/stocksFilter.php",
-            data:{selection:selection},
-            dataType:"json",
-            success:function(response){
-                var len = response.length;
-                for (var i=0;i<len;i++){
-                    $("#productsTable td").remove();
-                    $('#productsTable tbody').append('<tr><td>'+response[i]['prod_name']+'</td><td>'+response[i]['prod_desc']+'</td><td>'+response[i]['prod_price']+'</td><td>'+response[i]['prod_quantity']+'</td><td>'+response[i]['prod_category']+'</td><td>'+'</td></tr>')               
-                
-                }
-            }
-
-        })
-    });
-
-
-    
-
-
-
-</script>
-
-
-
+<script src="script.js"></script>
 </body>
 </html>
